@@ -1,9 +1,6 @@
-
 const query = {
     Query: {
-        estudiantes(): string {
-            return "Lista de estudiantes";
-        }
+        estudiantes: () => "Lista de estudiantes"
     }
 };
 

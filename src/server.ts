@@ -1,18 +1,13 @@
-import express from "express";
-import compression from "compression";
-import cors from "cors";
-import { createServer } from "http";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from '@apollo/server/standalone';
+import { schema } from "./schema/index.js";
 
-const app = express();
-app.use("*",cors());
-app.use(compression());
 
-app.get("/", (req, res) => {
-    res.send("Bienvenido a la academia online en GraphQL");
-});
-
-const httpServer = createServer(app);
+const server = new ApolloServer(schema);
 
 const PORT = 5200;
-httpServer.listen({ port: PORT },
-    () => console.log(`Servidor listo escuchando en http://localhost:${PORT}`));
+const {url} = await startStandaloneServer(server, {
+    listen: {port: PORT}
+});
+
+console.log(`🚀  Server ready at: ${url}`);
