@@ -20,7 +20,8 @@ const type = {
                 }
             });
             return list;
-        }
+        },
+        path: (parent: any) => `https://www.udemy.com${parent.path}`
     }
 };
 
