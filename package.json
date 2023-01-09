@@ -1,0 +1,11 @@
+{
+  "name": "academia-online",
+  "version": "1.0.0",
+  "description": "API GraphQL Academia Online",
+  "main": "build/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cesar Augusto Diaz <cesar.a.diaz@gmail.com>",
+  "license": "MIT"
+}
