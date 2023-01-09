@@ -64,7 +64,29 @@ const mutation = {
                 reviews: []
             }
         },
-        // deleteCourse: (id: string) => {},
+        deleteCourse: (_: void, args: any) => {
+            const { id } = args;
+
+            const courses = database.cursos.filter(curso => curso.id === id);
+            if(courses.length > 0) {
+                const index = database.cursos.indexOf(courses[0]);
+                
+                const valor = database.cursos.splice(index, 1);
+                return valor[0];
+            }
+
+            return {
+                id: "-1",
+                title: `El curso con id ${id} no existe`,
+                clases: -1,
+                time: 0.0,
+                level: "ALL",
+                logo: "",
+                path: "",
+                teacher: "",
+                reviews: []
+            }
+        },
     }
 }; 
 
