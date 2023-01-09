@@ -1,6 +1,6 @@
 type Query {
     "Lista de los estudiantes de la académia"
-    estudiantes: [Student]
+    estudiantes: String
 }
 
 "Información de los estudiantes"
