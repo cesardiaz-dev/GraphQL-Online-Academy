@@ -1,6 +1,8 @@
+import { database } from "../data/data.store.js";
+
 const query = {
     Query: {
-        estudiantes: () => "Lista de estudiantes"
+        students: () => database.estudiantes
     }
 };
 
