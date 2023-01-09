@@ -1,0 +1,62 @@
+type Query {
+    "Lista de los estudiantes de la académia"
+    estudiantes: [Student]
+}
+
+"Información de los estudiantes"
+type Student {
+    "Identificación del estudiante"
+    id: ID!
+    "Nombre del estudiante"
+    name: String!
+    "Correo electrónico del estudiante"
+    email: String!
+    "Sitio web del estudiante"
+    website: String
+    "Cursos matriculados por el estudiante"
+    courses: [Course]!
+}
+
+"Información de los cursos impartidos por la académia"
+type Course {
+    "Identificación del curso"
+    id: ID!
+    "Nombre del curso"
+    title: String!
+    "Mensaje descriptivo del curso"
+    description: String
+    "Número de clases que forman parte del curso"
+    clases: Int!
+    "Duración aproximada del curso en horas"
+    time: Float!
+    "Nivel de exigencia del curso"
+    level: Level!
+    "URL de la imagen a mostrar en el catalogo de cursos"
+    logo: String!
+    "Ruta donde se encuentra publicado el curso"
+    path: String!
+    "Nombre del profesor que imparte el curso"
+    teacher: String!
+    "Reseñas que han sido realizadas al curso"
+    reviews: [Review]
+}
+
+"Niveles a los que pertenece el curso"
+enum Level {
+    ALL
+    ROOKIE
+    MEDIUM
+    EXPERT
+}
+
+"Reseñas a los cursos de la académia"
+type Review {
+    "Identificación de la reseña"
+    id: ID!
+    "Nombre del estudiante que realizó la reseña"
+    name: String!
+    "Valoración dada al curso por parte del estudiante"
+    points: Float!
+    "Comentario dado por el estudiante sobre el curso"
+    comment: String
+}
