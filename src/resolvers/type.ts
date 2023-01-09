@@ -9,6 +9,18 @@ const type = {
             });
             return list;
         }
+    },
+    Course: {
+        students: (parent: any) => {
+            const list = <any>[];
+            const id = parent.id;
+            database.estudiantes.map((estudiante: any) => {
+                if(estudiante.courses.filter((id: any) => id === parent.id) > 0) {
+                    list.push(estudiante);
+                }
+            });
+            return list;
+        }
     }
 };
 
