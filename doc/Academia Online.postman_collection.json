@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "8909fdd3-0bdf-4bc7-9cf1-0e6105b33afc",
+		"name": "Academia Online",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13657845"
+	},
+	"item": [
+		{
+			"name": "Estudiantes",
+			"item": [
+				{
+					"name": "Listado de estudiantes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Estudiantes {\r\n    students {\r\n        id\r\n        name\r\n        email\r\n        website\r\n        courses {\r\n            id\r\n            title\r\n            clases\r\n            level\r\n        }\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar estudiante por ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ConsultarEstudiante($id: ID!) {\r\n    student(id: $id) {\r\n        id\r\n        name\r\n        email\r\n        courses {\r\n            id\r\n            title\r\n            teacher\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"id\": 1\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar varios estudiantes por ID (Alias y Fragmentos)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ConsultarEstudiante($id1: ID!,$id2: ID!,$id3: ID!) {\r\n    dos: student(id: $id1) {\r\n        ...datosEstudiante\r\n    }\r\n    tres: student(id: $id2) {\r\n        ...datosEstudiante\r\n    }\r\n    student(id: $id3) {\r\n        id\r\n        name\r\n    }\r\n}\r\n\r\nfragment datosEstudiante on Student {\r\n    id\r\n    name\r\n    email\r\n    courses {\r\n        id\r\n        title\r\n        teacher\r\n    }\r\n}",
+								"variables": "{\r\n    \"id1\": 2,\r\n    \"id2\": 3,\r\n    \"id3\": 4\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cursos",
+			"item": [
+				{
+					"name": "Listado de cursos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\r\n    courses {\r\n        id\r\n        title\r\n        description\r\n        level\r\n        clases\r\n        time\r\n        logo\r\n        path\r\n        teacher\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar curso por ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ConsultaCurso($id: ID!) {\r\n    course(id: $id) {\r\n        id\r\n        title\r\n        description\r\n        level\r\n        clases\r\n        time\r\n        logo\r\n        path\r\n        teacher\r\n        students {\r\n            id\r\n            name\r\n            email\r\n        }\r\n        reviews {\r\n            id\r\n            comment\r\n            name\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"id\": \"5\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar varios cursos por ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ConsultaCurso($id1: ID!, $id2: ID!) {\r\n    uno: course(id: $id1) {\r\n        ...detalleCurso\r\n    }\r\n    dos: course(id: $id2) {\r\n        ...detalleCurso\r\n    }\r\n}\r\n\r\nfragment detalleCurso on Course {\r\n    id\r\n    title\r\n    description\r\n    level\r\n    clases\r\n    time\r\n    logo\r\n    path\r\n    teacher\r\n    students {\r\n        id\r\n        name\r\n        email\r\n    }\r\n    reviews {\r\n        id\r\n        comment\r\n        name\r\n    }\r\n}",
+								"variables": "{\r\n    \"id1\": \"1\",\r\n    \"id2\": \"2\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar cursos por ID (Include)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ConsultaCurso($id1: ID!, $id2: ID!, $include: Boolean!) {\r\n    uno: course(id: $id1) {\r\n        ...detalleCurso\r\n    }\r\n    dos: course(id: $id2) {\r\n        ...detalleCurso\r\n    }\r\n}\r\n\r\nfragment detalleCurso on Course {\r\n    id\r\n    title \r\n    description\r\n    level\r\n    clases\r\n    time\r\n    logo\r\n    path\r\n    teacher\r\n    students  @include(if: $include) {\r\n        id\r\n        name\r\n        email\r\n    }\r\n    reviews  @include(if: $include) {\r\n        id\r\n        comment\r\n        name\r\n    }\r\n}",
+								"variables": "{\r\n    \"id1\": \"1\",\r\n    \"id2\": \"2\",\r\n    \"include\": true\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar cursos por ID (Skip)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ConsultaCurso($id1: ID!, $id2: ID!, $skip: Boolean!) {\r\n    uno: course(id: $id1) {\r\n        ...detalleCurso\r\n    }\r\n    dos: course(id: $id2) {\r\n        ...detalleCurso\r\n    }\r\n}\r\n\r\nfragment detalleCurso on Course {\r\n    id\r\n    title \r\n    description\r\n    level\r\n    clases\r\n    time\r\n    logo\r\n    path\r\n    teacher\r\n    students  @skip(if: $skip) {\r\n        id\r\n        name\r\n        email\r\n    }\r\n    reviews  @skip(if: $skip) {\r\n        id\r\n        comment\r\n        name\r\n    }\r\n}",
+								"variables": "{\r\n    \"id1\": \"1\",\r\n    \"id2\": \"2\",\r\n    \"skip\": true\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insertar curso",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation NuevoCurso($course: CourseInput!) {\r\n    addCourse(course: $course) {\r\n        id\r\n        title\r\n        description\r\n        clases\r\n        time\r\n        level\r\n        logo\r\n        path\r\n        teacher\r\n        reviews {\r\n            id\r\n            name\r\n            points      \r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"course\": {\r\n        \"title\": \"Curso de GraphQL\",\r\n        \"description\":\"Este es un nuevo curso de GraphQL mas detallado\",\r\n        \"clases\": 300,\r\n        \"time\": 34.8,\r\n        \"level\": \"ALL\",\r\n        \"logo\": \"\",\r\n        \"path\": \"\",\r\n        \"teacher\": \"Cesar Diaz\"\r\n    } \r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar curso",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation ActualizarCurso($course: CourseInput!) {\r\n    updateCourse(course: $course) {\r\n        id\r\n        title\r\n        description\r\n        clases\r\n        time\r\n        level\r\n        logo\r\n        path\r\n        teacher\r\n        reviews {\r\n            id\r\n            name\r\n            points      \r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"course\": {\r\n        \"id\": \"5\",\r\n        \"title\": \"Curso de GraphQL\",\r\n        \"description\":\"Este es un nuevo curso de GraphQL mas detallado\",\r\n        \"clases\": 240,\r\n        \"time\": 34.8,\r\n        \"level\": \"ALL\",\r\n        \"logo\": \"\",\r\n        \"path\": \"\",\r\n        \"teacher\": \"Cesar Diaz\"\r\n    } \r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar curso",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation EliminarCurso($id: ID!) {\r\n    deleteCourse(id: $id) {\r\n        id\r\n        title\r\n        description\r\n        clases\r\n        time\r\n        level\r\n        logo\r\n        path\r\n        teacher\r\n        reviews {\r\n            id\r\n            name\r\n            points      \r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"id\": \"5\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql api url}}",
+							"host": [
+								"{{graphql api url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "graphql api url",
+			"value": "http://localhost:5200/graphql",
+			"type": "string"
+		}
+	]
+}
