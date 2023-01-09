@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { database } from "../data/data.store.js";
 
 const type = {
@@ -6,7 +5,7 @@ const type = {
         courses: (parent: any) => {
             const list: Array<any> = [];
             parent.courses.map((id: String) => {
-                list.push(_.filter(database.cursos, ["id", id])[0])
+                list.push(database.cursos.filter((curso) => curso.id == id )[0]);
             });
             return list;
         }
