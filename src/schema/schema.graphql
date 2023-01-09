@@ -5,6 +5,8 @@ type Query {
     student(id: ID!): Student
     "Listado de los cursos de la academia"
     courses: [Course]!
+    "Información del curso por ID"
+    course(id: ID!): Course
 }
 
 "Información de los estudiantes"
@@ -41,6 +43,8 @@ type Course {
     path: String!
     "Nombre del profesor que imparte el curso"
     teacher: String!
+    "Estudiantes enrolados en el curso"
+    students: [Student]
     "Reseñas que han sido realizadas al curso"
     reviews: [Review]
 }
