@@ -1,5 +1,5 @@
 type Query {
-    "Lista de los estudiantes de la académia"
+    "Lista de los estudiantes de la academia"
     students: [Student!]!
     "Información del estudiante por ID"
     student(id: ID!): Student
@@ -7,6 +7,15 @@ type Query {
     courses: [Course]!
     "Información del curso por ID"
     course(id: ID!): Course
+}
+
+type Mutation {
+    "Adiciona un nuevo curso a la academia"
+    addCourse(course: CourseInput!): Course!
+    "Modifica un curso existente de la academia"
+    updateCourse(course: CourseInput!): Course!
+    "Elimina un curso de la academia"
+    deleteCourse(id: ID!): Course!
 }
 
 "Información de los estudiantes"
@@ -23,7 +32,29 @@ type Student {
     courses: [Course]!
 }
 
-"Información de los cursos impartidos por la académia"
+"Información de los cursos a ser manipulados"
+input CourseInput {
+    "Identificación del curso"
+    id: ID
+    "Nombre del curso"
+    title: String!
+    "Mensaje descriptivo del curso"
+    description: String
+    "Número de clases que forman parte del curso"
+    clases: Int!
+    "Duración aproximada del curso en horas"
+    time: Float!
+    "Nivel de exigencia del curso"
+    level: Level! = ALL
+    "URL de la imagen a mostrar en el catalogo de cursos"
+    logo: String!
+    "Ruta donde se encuentra publicado el curso"
+    path: String!
+    "Nombre del profesor que imparte el curso"
+    teacher: String!
+}
+
+"Información de los cursos impartidos por la academia"
 type Course {
     "Identificación del curso"
     id: ID!
@@ -57,7 +88,7 @@ enum Level {
     EXPERT
 }
 
-"Reseñas a los cursos de la académia"
+"Reseñas a los cursos de la academia"
 type Review {
     "Identificación de la reseña"
     id: ID!
